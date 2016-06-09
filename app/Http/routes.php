@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\App;
-use Vinkla\Pusher\Facades\Pusher;
 
 Route::get('bridge', function() {
-   	Pusher::trigger('my-channel', 'my-event', ['message' => 'Hello']);
-   	return view('welcome');
+    $pusher = App::make('pusher');
+
+    $pusher->trigger( 'test-channel',
+                      'test-event', 
+                      array('text' => 'Preparing the Pusher Laracon.eu workshop!'));
+
+    return view('welcome');
 });
+
+Route::controller('notifications', 'NotificationController');
