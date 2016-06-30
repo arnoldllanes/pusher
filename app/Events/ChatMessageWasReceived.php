@@ -31,7 +31,7 @@ class ChatMessageWasReceived extends Event implements ShouldBroadcast
     public function broadcastOn()
     {
         return [
-            "chat-room.1"
+            "private-chat-room.1"
         ];
     }
 }
