@@ -2,16 +2,20 @@
 
 namespace App\Events;
 
-use App\Events\Event;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ChatMessageWasReceived extends Event implements ShouldBroadcast
+class ChatMessageWasReceived implements ShouldBroadcast
 {
-    use SerializesModels;
+    use InteractsWithSockets, SerializesModels;
 
     public $chatMessage;
     public $user;
+
     /**
      * Create a new event instance.
      *
@@ -24,14 +28,12 @@ class ChatMessageWasReceived extends Event implements ShouldBroadcast
     }
 
     /**
-     * Get the channels the event should be broadcast on.
+     * Get the channels the event should broadcast on.
      *
-     * @return array
+     * @return Channel|array
      */
     public function broadcastOn()
     {
-        return [
-            "private-chat-room.1"
-        ];
+         return new Channel('chat-room.1');
     }
 }
