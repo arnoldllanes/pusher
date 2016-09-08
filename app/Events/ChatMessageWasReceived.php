@@ -15,16 +15,18 @@ class ChatMessageWasReceived implements ShouldBroadcast
 
     public $chatMessage;
     public $user;
+    public $status;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($chatMessage, $user)
+    public function __construct($chatMessage, $user, $status)
     {
         $this->chatMessage = $chatMessage;
         $this->user = $user;
+        $this->status = $status;
     }
 
     /**
@@ -34,6 +36,6 @@ class ChatMessageWasReceived implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-         return new Channel('chat-room.1');
+          return new PrivateChannel('chat-room.1');
     }
 }

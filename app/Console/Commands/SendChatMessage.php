@@ -43,7 +43,8 @@ class SendChatMessage extends Command
             'user_id' => $user->id,
             'message' => $this->argument('message')
         ]);
+        $status = 'Logged in';
 
-        event(new \App\Events\ChatMessageWasReceived($message, $user));
+        event(new \App\Events\ChatMessageWasReceived($message, $user, $status));
     }
 }
