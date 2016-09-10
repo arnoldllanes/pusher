@@ -11,7 +11,7 @@ class CreateChatMessagesTable extends Migration
      *
      * @return void
      */
-    public function up()
+   public function up()
     {
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->increments('id');
@@ -21,11 +21,6 @@ class CreateChatMessagesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::drop('chat_messages');

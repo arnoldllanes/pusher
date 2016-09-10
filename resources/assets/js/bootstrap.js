@@ -41,13 +41,12 @@ import Echo from "laravel-echo"
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '781c5650571f02321111'
+    key: 'fe789638f03747e3fdf0',
+    namespace: 'App.Events.ChatMessageWasReceived'
 });
 
-
-Echo.private('chat-room.1')
-	.listen('.App.Events.ChatMessageWasReceived', (data) => {
-		console.log(data.user, data.chatMessage);
-
-	});
-
+Echo.channel('chat-room.1')
+    .listen('ChatMessageWasReceived', (e) => {
+    	alert('ready');
+        console.log(e.user, e.chatMessage);
+    });

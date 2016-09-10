@@ -15,27 +15,20 @@ class ChatMessageWasReceived implements ShouldBroadcast
 
     public $chatMessage;
     public $user;
-    public $status;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($chatMessage, $user, $status)
+    public function __construct($chatMessage, $user)
     {
         $this->chatMessage = $chatMessage;
         $this->user = $user;
-        $this->status = $status;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
     public function broadcastOn()
     {
-          return new PrivateChannel('chat-room.1');
+        return new Channel('chat-room.1');
     }
 }
