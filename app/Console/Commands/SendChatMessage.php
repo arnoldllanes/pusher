@@ -33,6 +33,6 @@ class SendChatMessage extends Command
             'message' => $this->argument('message')
         ]);
 
-        event(new \App\Events\ChatMessageWasReceived($message, $user));
+        broadcast(new \App\Events\ChatMessageWasReceived($message, $user))->toOthers();
     }
 }

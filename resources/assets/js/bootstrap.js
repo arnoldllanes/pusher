@@ -37,16 +37,40 @@ Vue.http.interceptors.push((request, next) => {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from "laravel-echo"
+import EchoLibrary from "laravel-echo"
 
-window.Echo = new Echo({
+window.Echo = new EchoLibrary({
     broadcaster: 'pusher',
-    key: 'fe789638f03747e3fdf0',
-    namespace: 'App.Events.ChatMessageWasReceived'
+    key: 'fe789638f03747e3fdf0'
 });
 
-Echo.channel('chat-room.1')
+Echo.private('chat-room.1')
     .listen('ChatMessageWasReceived', (e) => {
-    	alert('ready');
         console.log(e.user, e.chatMessage);
+  	});
+
+Echo.join('chat-room-presence.1')
+    .here(function (members) {
+        console.table(members);
+    })
+    .joining(function (joiningMember, members) {
+        // runs when another member joins
+        console.table(joiningMember);
+    })
+    .leaving(function (leavingMember, members) {
+        // runs when another member leaves
+        console.table(leavingMember);
+    });
+
+    Echo.join('chat-room-presence.2')
+    .here(function (members) {
+        console.table(members);
+    })
+    .joining(function (joiningMember, members) {
+        // runs when another member joins
+        console.table(joiningMember);
+    })
+    .leaving(function (leavingMember, members) {
+        // runs when another member leaves
+        console.table(leavingMember);
     });
